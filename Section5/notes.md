@@ -61,6 +61,12 @@ contract first{
 - So the first contract references the second and has a function that will create a **new** instance of the second contract
 - the functions parameters will fill the second functions constructor parameters
 
+# The sections that follow in the course were extremely hard to understand. It required that I do my own research in order to understand and apply the concepts.
+
+- structs
+- error handling
+- sending ether : transfer() , send(), call()
+
 ### Structs
 
 - a struct is a logical grouping of variables
