@@ -72,6 +72,12 @@ contract first{
 - a struct is a logical grouping of variables
 - they allow us to group data together
 
+#### DIA Pattern
+
+1. Define the struct
+2. Initialize the struct
+3. assign values to the struct instance
+
 ```
 struct Car{
     string model;
@@ -163,4 +169,71 @@ delete _car.owner;
 // or all fields
 
 delete cars[1];
+```
+
+### Exceptions / Errors
+
+#### Require
+
+- throws an exception
+- will not complete the transaction
+- has an optional error message
+- everything in the transaction will be rolled back, regardless of where the require statement is in the transaction code
+- when it is compiled it changes the code to:
+
+```
+revert Error(string);
+// string = error message provided
+```
+
+- any gas remaining will be returned to the user
+
+#### Revert
+
+- revert and require do the same thing
+- revert is better if your condition is nested in a lot of statements
+
+```
+if(_number == 2 ether){
+    do something;
+    if(_number > 2 ether){
+        do something else;
+        if(_number < 2 ether){
+            revert("message");
+        }
+    }
+}
+```
+
+#### Assert
+
+- used to check invariants
+- invariants are states our contract should never reach
+- it will use all available gas
+  - this is a panic
+
+```
+assert(bool condition)
+```
+
+#### Custom Errors
+
+- we can save gas by using custom errors
+
+```
+//initialize
+error MyError(address caller, uint _value);
+// we can log some info here
+```
+
+- can only be used with revert right now
+
+```
+uint public newNumber;
+function testCustomError(uint _number) public{
+    newNumber = _number;
+    if(_number > 10){
+        revert MyError(msg.sender, _number);
+    }
+}
 ```
