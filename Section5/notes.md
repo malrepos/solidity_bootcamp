@@ -86,7 +86,7 @@ struct Car{
 Car public car;
 ```
 
-    - where Car is the struct name, and car is the name of the instance
+    - where Car is the struct name, and car is the name of the instance we are creating
 
 - we can also create an array of structs:
 
@@ -132,7 +132,7 @@ cars.push(ford);
 cars.push(tesla);
 ```
 
-- we can create a struct an push it to an array in one go:
+- we can create a struct and push it to an array in one go:
 
 ```
 cars.push(Cars("mazda", 2020, msg.sender));
